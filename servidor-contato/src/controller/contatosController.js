@@ -1,31 +1,26 @@
 const model = require("../model/contatos");
+const baseDados = model.agenda.contatos
 
 const getAll = (request, response) => {
   console.log(request.url);
   response.status(200).send(model.agenda);
 };
 
-const comparaDados = (request, response) => {
-  const contato = resquest.body
-  const usuarios = request.body.nome
-  const data = request.body.dataNascimento
-  const concat = usuarios + data
-  // console.log(concat)
-  // if(nomeUsuario && data === add){
-  //   res.redirect(409, "https://http.cat/409") 
- model.agenda.contatos.push(contato)
-  response.status(200).send()
-}
-
 const add = (request, response) => {
   let dadosContato = request.body
   dadosContato.id = Math.random().toString(36).substr(-8)
+  if (!contato.nome|| !contato.dataNascimento || !contato.celular){
+    response.status(400).send("Favor preencher todos os campos")
+  } 
+  if (baseDados.find(dado => dado.nome === dadosContato.nome)){
+    response.status(400).send("Usuário já cadastrado")
+  } else {
   model.agenda.contatos.push(dadosContato)
-  response.status(200).send() 
+  response.status(201).send(dadosContato) 
+  }
 }
 
 module.exports = {
   getAll,
-  add,
-  comparaUsuarios: comparaDados
+  add
 }
