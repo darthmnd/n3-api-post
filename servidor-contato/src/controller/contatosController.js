@@ -9,7 +9,7 @@ const getAll = (request, response) => {
 const add = (request, response) => {
   let dadosContato = request.body
   dadosContato.id = Math.random().toString(36).substr(-8)
-  if (!contato.nome|| !contato.dataNascimento || !contato.celular){
+  if (!dadosContato.nome|| !dadosContato.dataNascimento || !dadosContato.celular){
     response.status(400).send("Favor preencher todos os campos")
   } 
   if (baseDados.find(dado => dado.nome === dadosContato.nome)){
@@ -20,7 +20,16 @@ const add = (request, response) => {
   }
 }
 
+const usuarioSigno = (request, response) => {
+  let dadosContato = request.body
+  const usuarioNome = dadosContato.nome
+  const signo = dadosContato.signo
+  model.agenda.contatos.push(dadosContato)
+  response.status(200).send(`Olá ${usuarioNome}! Seu signo é de ${signo}`)
+}
+
 module.exports = {
   getAll,
-  add
+  add,
+  usuarioSigno
 }
