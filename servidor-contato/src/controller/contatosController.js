@@ -20,14 +20,6 @@ const add = (request, response) => {
   }
 }
 
-const usuarioSigno = (request, response) => {
-  let dadosContato = request.body
-  const usuarioNome = dadosContato.nome
-  const signo = dadosContato.signo
-  model.agenda.contatos.push(dadosContato)
-  response.status(200).send(`Olá ${usuarioNome}! Seu signo é de ${signo}`)
-}
-
 module.exports = {
   getAll,
   add,
